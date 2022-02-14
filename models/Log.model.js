@@ -3,7 +3,7 @@ const { Schema, model, Types } = require("mongoose");
 // TODO: Please make sure you edit the user model to whatever makes sense in this case
 const logSchema = new Schema(
   {
-    title: {
+    date: {
       type: String,
       required: true,
     },
