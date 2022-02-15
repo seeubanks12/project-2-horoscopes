@@ -6,7 +6,7 @@ const isLoggedIn = require("../middleware/isLoggedIn");
 //This pulls up the create tweet form
 router.get("/daily-logs/create-log", (req, res) => {
   console.log("Hello World");
-  res.render("create-log");
+  res.render("daily-logs/create-log");
 });
 
 //This saves a new tweet in the database
@@ -31,7 +31,7 @@ router.get("/daily-logs/all-logs", (req, res) => {
     .populate("creatorId")
     .then((allLogs) => {
       console.log("All logs", allLogs);
-      res.render("all-logs", { logs: allLogs });
+      res.render("daily-logs/all-logs", { logs: allLogs });
     })
     .catch((err) => {
       console.log("Something went wrong", err);

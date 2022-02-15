@@ -1,8 +1,10 @@
 <h1>This is {{user.name}}'s profile page</h1>
 
 <h2>{{user.name}}'s Daily Horoscope</h2>
+<p>{{user.sign}}</p>
+<p>{{horoscope.description}}</p>
 
-<a href="/{{user.id}}/create-log">Add Entry</a>
+<a href="/log/daily-logs/create-log">Add Entry</a>
 
 <a href="/user/{{user.id}}/edit-user">Update Information</a>
 <form action ="/user/{{user.id}}/delete" method ="POST">
@@ -12,6 +14,7 @@
 
   <h3>{{this.title}}</h3>
   <p>{{this.content}}</p>
+  
   
 
 {{/each}}

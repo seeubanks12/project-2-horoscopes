@@ -3,6 +3,7 @@ const User = require("../models/User.model");
 const Log = require("../models/Log.model");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
+const aztroJs = require("aztro-js");
 // const req = require("express/lib/request");
 // const { get } = require("express/lib/response");
 // const { is } = require("express/lib/request");
@@ -39,7 +40,7 @@ router.post("/signup", (req, res) => {
     .then((createdUser) => {
       console.log("User was created", createdUser);
       req.session.user = createdUser;
-      res.render("profile-page", { user: req.session.user });
+      res.redirect(`/user/${createdUser._id}/profile-page`);
     })
     .catch((err) => {
       console.log("Something went wrong", err);
@@ -79,7 +80,8 @@ router.post("/login", (req, res) => {
 
     req.session.user = foundUser;
     console.log("user logged in");
-    res.render("profile-page", { user: req.session.user });
+    // res.render("profile-page", { user: req.session.user });
+    res.redirect(`/user/${foundUser._id}/profile-page`);
     //user: req.session.user - user is what will be indentified in the views page.
   });
 });
@@ -100,26 +102,28 @@ router.post("/login", (req, res) => {
 // });
 
 //Gets the user's profile page
-router.get("/profile/:userId", (req, res) => {
-  User.findById(req.params.userId)
-    .then((foundUser) => {
-      Log.find({ creatorId: req.params.userId })
-        .then((foundLogs) => {
-          console.log("Found all of the daily logs", foundLogs);
-          res.render("profile-page", { user: foundUser, logs: foundLogs });
-        })
-        .catch((err) => {
-          console.log("Something went wrong", err);
+router.get("/:userId/profile-page", (req, res) => {
+  User.findById(req.params.userId).then((foundUser) => {
+    Log.find({ creatorId: req.params.userId })
+      .then((foundLogs) => {
+        aztroJs.getTodaysHoroscope(foundUser.sign, function (horoscope) {
+          console.log(horoscope);
+          res.render("profile-page", {
+            user: foundUser,
+            logs: foundLogs,
+            horoscope,
+          });
         });
-    })
-    .catch((err) => {
-      console.log("Something went wrong", err);
-    });
+      })
+      .catch((err) => {
+        console.log("Something went wrong", err);
+      });
+  });
 });
 
 //Update User
 router.get("/:id/edit-user", (req, res, next) => {
-  console.log("Hello THERE!");
+  // console.log("Hello THERE!");
   // Iteration #4: Update the drone
   // ... your code here
   User.findById(req.params.id)
@@ -140,8 +144,8 @@ router.post("/:id/edit-user", (req, res, next) => {
     email: req.body.email,
     sign: req.body.sign,
   })
-    .then(() => {
-      res.render("profile-page");
+    .then((updatedUser) => {
+      res.redirect(`/user/${updatedUser._id}/profile-page`);
     })
     .catch((err) => {
       console.log("Something went wrong", err);
