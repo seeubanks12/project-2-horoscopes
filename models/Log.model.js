@@ -22,6 +22,6 @@ const logSchema = new Schema(
   }
 );
 
-const Tweet = model("Tweet", tweetSchema);
+const Log = model("Log", logSchema);
 
-module.exports = Tweet;
+module.exports = Log;

@@ -6,6 +6,8 @@ router.get("/", (req, res, next) => {
   res.render("index");
 });
 
+// Connect API to database
+
 router.get("/test", (req, res, next) => {
   var options = {
     method: "POST",

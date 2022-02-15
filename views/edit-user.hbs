@@ -1,15 +1,10 @@
-<form action="/user/signup" method="POST">
-   <label> Name
-      <input type="text" name="name">
-   </label>
-   <label> Email
-      <input type="email" name="email">
-   </label>
-   <label> Password
-      <input type="password" name="password">
-   </label>
-   <label> Select Your Sign
-      <select id="sign" name="sign">
+<h2>Update Your Information</h2>
+<form action="/user/{{user.id}}/edit-user" method="POST">
+    <label for="name">Name</label>
+    <input type="text"  id="name" name="name" value="{{user.name}}">
+    <label for="email">Email</label>
+    <input type="text"  id="email" name="email" value="{{user.email}}">
+   <select id="sign" name="sign">
   <option value="Aries">Aries (March 21-April 19)</option>
   <option value="Taurus">Taurus (April 20-May 20)</option>
   <option value="Gemini">Gemini (May 21-June 20)</option>
@@ -23,11 +18,5 @@
   <option value="Aquarius">Aquarius (January 20-February 18)</option>
   <option value="Pisces">Pisces (February 19-March 20)</option>
 </select>
-   </label>
-
-   <button type="submit">Submit</button>
+   <button type="submit">Update</button>
 </form>
-
-{{#if errorMessage}}
-   {{errorMessage}}
-{{/if}}

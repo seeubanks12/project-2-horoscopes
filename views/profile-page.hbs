@@ -1,0 +1,17 @@
+<h1>This is {{user.name}}'s profile page</h1>
+
+<h2>{{user.name}}'s Daily Horoscope</h2>
+
+<a href="/{{user.id}}/create-log">Add Entry</a>
+
+<a href="/user/{{user.id}}/edit-user">Update Information</a>
+<form action ="/user/{{user.id}}/delete" method ="POST">
+<button type="submit">Delete</button>
+
+{{#each logs}}
+
+  <h3>{{this.title}}</h3>
+  <p>{{this.content}}</p>
+  
+
+{{/each}}

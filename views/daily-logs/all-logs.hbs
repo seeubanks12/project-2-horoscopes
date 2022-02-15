@@ -1,0 +1,9 @@
+<h2>All Entries</h2>
+
+{{#each log}}
+
+  <h3>{{this.title}}</h3>
+  <p>{{this.content}}</p>
+  <a href="/user/profile/{{this.creatorId._id}}">{{this.creatorId.name}}</a>
+
+{{/each}}
