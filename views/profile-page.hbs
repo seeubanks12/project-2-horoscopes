@@ -1,20 +1,21 @@
+
 <h1>This is {{user.name}}'s profile page</h1>
 
 <h2>{{user.name}}'s Daily Horoscope</h2>
 <p>{{user.sign}}</p>
-<p>{{horoscope.description}}</p>
+<p>Today's Date: {{horoscope.current_date}}</p>
+<p>Your Horoscope: {{horoscope.description}}</p>
+<p>Your Color: {{horoscope.color}}</p>
+<p>Your Horoscope Compatibility: {{horoscope.compatibility}}</p>
+<p>Your Lucky Number: {{horoscope.lucky_number}}</p>
+<p>Your Lucky Time: {{horoscope.lucky_time}}</p>
+<p>Your Mood: {{horoscope.mood}}</p>
+
 
 <a href="/log/daily-logs/create-log">Add Entry</a>
+<a href ="/log/{{user.id}}/all-logs">All Entries</a>
 
 <a href="/user/{{user.id}}/edit-user">Update Information</a>
 <form action ="/user/{{user.id}}/delete" method ="POST">
-<button type="submit">Delete</button>
+<button type="submit">Delete Account</button>
 
-{{#each logs}}
-
-  <h3>{{this.title}}</h3>
-  <p>{{this.content}}</p>
-  
-  
-
-{{/each}}

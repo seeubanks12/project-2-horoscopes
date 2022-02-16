@@ -11,6 +11,9 @@ const logSchema = new Schema(
       type: String,
       required: true,
     },
+    mood: {
+      type: String,
+    },
     creatorId: {
       type: Types.ObjectId,
       ref: "User",

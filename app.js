@@ -5,13 +5,13 @@ require("dotenv/config");
 // ℹ️ Connects to the database
 require("./db");
 
+const User = require("./models/User.model");
+
 // Handles http requests (express is node js framework)
 // https://www.npmjs.com/package/express
 const express = require("express");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
-
-
 
 // Handles the handlebars
 // https://www.npmjs.com/package/hbs
@@ -21,6 +21,17 @@ const app = express();
 
 // ℹ️ This function is getting exported from the config folder. It runs most pieces of middleware
 require("./config")(app);
+
+app.use((req, res, next) => {
+  if (req.session.user) {
+    User.findById(req.session.user._id).then((user) => {
+      req.app.locals.globalUser = user;
+      next();
+    });
+  } else {
+    next();
+  }
+});
 
 const projectName = "project-2-horoscopes";
 const capitalized = (string) =>
@@ -49,8 +60,6 @@ app.use(
 const index = require("./routes/index");
 app.use("/", index);
 
-// const authRoutes = require("./routes/auth");
-// app.use("/auth", authRoutes);
 
 const log = require("./routes/log");
 app.use("/log", log);

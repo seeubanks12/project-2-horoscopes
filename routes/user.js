@@ -4,6 +4,7 @@ const Log = require("../models/Log.model");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const aztroJs = require("aztro-js");
+const isLoggedIn = require("../middleware/isLoggedIn");
 // const req = require("express/lib/request");
 // const { get } = require("express/lib/response");
 // const { is } = require("express/lib/request");
@@ -39,6 +40,7 @@ router.post("/signup", (req, res) => {
   })
     .then((createdUser) => {
       console.log("User was created", createdUser);
+      req.app.locals.globalUser = createdUser;
       req.session.user = createdUser;
       res.redirect(`/user/${createdUser._id}/profile-page`);
     })
@@ -77,7 +79,7 @@ router.post("/login", (req, res) => {
     if (!match) {
       res.render("Incorrect password");
     }
-
+    req.app.locals.globalUser = foundUser;
     req.session.user = foundUser;
     console.log("user logged in");
     // res.render("profile-page", { user: req.session.user });
@@ -86,20 +88,26 @@ router.post("/login", (req, res) => {
   });
 });
 
-// router.get("/test-session", (req, res) => {
-//   console.log("Req session", req.session);
-//   if (req.session?.user?.username) {
-//     res.json(`Hi ${req.session.user.username}!`);
-//   } else {
-//     res.json("You are not logged in");
-//   }
-// });
+router.get("/test-session", (req, res) => {
+  console.log("Req session", req.session);
+  if (req.session?.user?.name) {
+    res.json(`Hi ${req.session.user.name}!`);
+  } else {
+    res.json("You are not logged in");
+  }
+});
 
-// router.get("/users//logout", (req, res) => {
-//   req.session.destroy();
-//   console.log("This is the session", req.session);
-//   res.render("You are logged out");
-// });
+router.get("/logout", isLoggedIn, (req, res) => {
+  req.app.locals.globalUser = null;
+  req.session.destroy((err) => {
+    if (err) {
+      return res
+        .status(500)
+        .render("user/logout", { errorMessage: err.message });
+    }
+    res.redirect("/");
+  });
+});
 
 //Gets the user's profile page
 router.get("/:userId/profile-page", (req, res) => {

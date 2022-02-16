@@ -1,9 +1,13 @@
-<h2>All Entries</h2>
+ <a href="/user/{{this._id}}/profile-page">Back to Profile</a>
 
-{{#each log}}
+{{#each logs}}
 
-  <h3>{{this.title}}</h3>
+  <h3>{{this.date}}</h3>
+  <p>{{this.mood}}</p>
   <p>{{this.content}}</p>
-  <a href="/user/profile/{{this.creatorId._id}}">{{this.creatorId.name}}</a>
+  <a href="/log/edit-log">Update</a>
+<form action ="/log/{{user._id}}/all-logs" method ="POST">
+<button type="submit">Delete</button>
 
 {{/each}}
+
