@@ -52,6 +52,7 @@ router.post("/signup", (req, res) => {
 
 //LOG IN
 router.get("/login", (req, res) => {
+  console.log("HELLLLLOOOOO");
   res.render("login");
 });
 
@@ -88,14 +89,14 @@ router.post("/login", (req, res) => {
   });
 });
 
-router.get("/test-session", (req, res) => {
-  console.log("Req session", req.session);
-  if (req.session?.user?.name) {
-    res.json(`Hi ${req.session.user.name}!`);
-  } else {
-    res.json("You are not logged in");
-  }
-});
+// router.get("/test-session", (req, res) => {
+//   console.log("Req session", req.session);
+//   if (req.session?.user?.name) {
+//     res.json(`Hi ${req.session.user.name}!`);
+//   } else {
+//     res.json("You are not logged in");
+//   }
+// });
 
 router.get("/logout", isLoggedIn, (req, res) => {
   req.app.locals.globalUser = null;

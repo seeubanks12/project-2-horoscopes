@@ -12,8 +12,11 @@
    <body>
 <nav>
       {{#if globalUser}}
+      
         <p>Hello, {{globalUser.name}}</p>
         <a href="/user/logout">Log out</a>
+         
+        
 
       {{else}}
         <a href="/user/login">Log in</a>
@@ -21,6 +24,7 @@
       {{/if}}
     </nav>
       {{{body}}}
+     
 
       <script src="/js/script.js"></script>
    </body>

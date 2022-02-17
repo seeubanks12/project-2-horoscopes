@@ -12,7 +12,7 @@ const logSchema = new Schema(
       required: true,
     },
     mood: {
-      type: String,
+      type: [String],
     },
     creatorId: {
       type: Types.ObjectId,

@@ -12,12 +12,26 @@ const User = require("./models/User.model");
 const express = require("express");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
+const SpotifyWebApi = require("spotify-web-api-node");
 
 // Handles the handlebars
 // https://www.npmjs.com/package/hbs
 const hbs = require("hbs");
 
 const app = express();
+
+const spotifyApi = new SpotifyWebApi({
+  clientId: process.env.CLIENT_ID,
+  clientSecret: process.env.CLIENT_SECRET,
+});
+
+// Retrieve an access token
+spotifyApi
+  .clientCredentialsGrant()
+  .then((data) => spotifyApi.setAccessToken(data.body["access_token"]))
+  .catch((error) =>
+    console.log("Something went wrong when retrieving an access token", error)
+  );
 
 // ℹ️ This function is getting exported from the config folder. It runs most pieces of middleware
 require("./config")(app);
@@ -37,7 +51,7 @@ const projectName = "project-2-horoscopes";
 const capitalized = (string) =>
   string[0].toUpperCase() + string.slice(1).toLowerCase();
 
-app.locals.title = "Horoscopes";
+app.locals.title = "spacelestial";
 
 app.use(
   session({
@@ -56,10 +70,18 @@ app.use(
   })
 );
 
+// app.get("/playlist/:playlistId", (req, res) = {
+// spotifyApi.getPlaylist('5ieJqeLJjjI8iJWaxeBLuK')
+//   .then(function(data) {
+//     console.log('Some information about this playlist', data.body);
+//   }, function(err) {
+//     console.log('Something went wrong!', err);
+//   })
+// });
+
 // 👇 Start handling routes here
 const index = require("./routes/index");
 app.use("/", index);
-
 
 const log = require("./routes/log");
 app.use("/log", log);

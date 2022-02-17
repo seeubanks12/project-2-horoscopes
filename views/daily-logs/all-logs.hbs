@@ -1,12 +1,15 @@
- <a href="/user/{{this._id}}/profile-page">Back to Profile</a>
+ <a href="/user/{{user._id}}/profile-page">Back to Profile</a>
+ 
 
 {{#each logs}}
 
   <h3>{{this.date}}</h3>
-  <p>{{this.mood}}</p>
+  {{#each this.mood}}
+  <p>{{this}}</p>
+  {{/each}}
   <p>{{this.content}}</p>
-  <a href="/log/edit-log">Update</a>
-<form action ="/log/{{user._id}}/all-logs" method ="POST">
+  <a href="/log/edit-log/{{this._id}}">Update</a>
+<form action ="/log/delete/{{this._id}}" method ="POST">
 <button type="submit">Delete</button>
 
 {{/each}}

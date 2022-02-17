@@ -30,6 +30,54 @@ router.post("/create-log", isLoggedIn, (req, res) => {
   // });
 });
 
+//Update Logs
+router.get("/edit-log/:id", (req, res, next) => {
+  console.log("Hello THERE!");
+  // Iteration #4: Update the drone
+  // ... your code here
+  Log.findById(req.params.id)
+    .then((foundLog) => {
+      console.log("We found this log", foundLog);
+      res.render("edit-log.hbs", { log: foundLog, user: req.session.user });
+    })
+    .catch((err) => {
+      console.log("Something went wrong", err);
+    });
+});
+
+router.post("/edit-log/:id", (req, res, next) => {
+  // Iteration #4: Update the drone
+  // ... your code here
+  Log.findByIdAndUpdate(req.params.id, {
+    date: req.body.date,
+    mood: req.body.mood,
+    content: req.body.content.trim(),
+  })
+    .then((allLogs) => {
+      res.render("daily-logs/all-logs", {
+        logs: allLogs,
+        user: req.session.user,
+      });
+    })
+    .catch((err) => {
+      console.log("Something went wrong", err);
+    });
+});
+
+//Delete Logs
+router.post("/delete/:id", (req, res, next) => {
+  // Iteration #5: Delete the drone
+  // ... your code here
+  Log.findByIdAndRemove(req.params.id)
+    .then((allLogs) => {
+      res.redirect(`/log/${req.session.user._id}/all-logs`);
+      console.log("Post Deleted");
+    })
+    .catch((err) => {
+      console.log("Something went wrong", err);
+    });
+});
+
 //This pulls all logs from a database
 router.get("/:userId/all-logs", (req, res) => {
   console.log("HEELLLOOOO AGAINNNNN");
@@ -38,52 +86,10 @@ router.get("/:userId/all-logs", (req, res) => {
     .populate("creatorId")
     .then((allLogs) => {
       console.log("All logs", allLogs);
-      res.render("daily-logs/all-logs", { logs: allLogs });
-    })
-    .catch((err) => {
-      console.log("Something went wrong", err);
-    });
-});
-
-//Update Logs
-router.get("/edit-log", (req, res, next) => {
-  console.log("Hello THERE!");
-  // Iteration #4: Update the drone
-  // ... your code here
-  Log.findById(req.params.id)
-    .then((foundLog) => {
-      console.log("We found this user");
-      res.render("edit-log.hbs", { log: foundLog });
-    })
-    .catch((err) => {
-      console.log("Something went wrong", err);
-    });
-});
-
-router.post("/edit-log", (req, res, next) => {
-  // Iteration #4: Update the drone
-  // ... your code here
-  Log.findByIdAndUpdate(req.params.id, {
-    date: req.body.date,
-    mood: req.body.mood,
-    content: req.body.content,
-  })
-    .then((allLogs) => {
-      res.render("daily-logs/all-logs", { logs: allLogs });
-    })
-    .catch((err) => {
-      console.log("Something went wrong", err);
-    });
-});
-
-//Delete Logs
-router.post("/log/delete", (req, res, next) => {
-  // Iteration #5: Delete the drone
-  // ... your code here
-  Log.findByIdAndRemove(req.params.id)
-    .then((allLogs) => {
-      res.render("daily-logs/all-logs", { logs: allLogs });
-      console.log("Post Deleted");
+      res.render("daily-logs/all-logs", {
+        logs: allLogs,
+        user: req.session.user,
+      });
     })
     .catch((err) => {
       console.log("Something went wrong", err);
