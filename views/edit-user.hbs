@@ -1,10 +1,14 @@
-<h2>Update Your Information</h2>
-<form action="/user/{{user.id}}/edit-user" method="POST">
-    <label for="name">Name</label>
-    <input type="text"  id="name" name="name" value="{{user.name}}">
-    <label for="email">Email</label>
-    <input type="text"  id="email" name="email" value="{{user.email}}">
-   <select id="sign" name="sign" value="{{user.sign}}">
+<div class="update">
+<div class="signup-form"></div>
+<h2 class="Sign">Update Your Information</h2>
+<form class="form1" action="/user/{{user.id}}/edit-user" method="POST">
+   
+    <input class="name" type="text"  id="name" name="name" value="{{user.name}}">
+    <br>
+    <input class="un" type="text"  id="email" name="email" value="{{user.email}}">
+    <br>
+   <select id="sign" class="horoscope" name="sign" value="{{user.sign}}">
+     
   <option value="Aries">Aries (March 21-April 19)</option>
   <option value="Taurus">Taurus (April 20-May 20)</option>
   <option value="Gemini">Gemini (May 21-June 20)</option>
@@ -18,5 +22,8 @@
   <option value="Aquarius">Aquarius (January 20-February 18)</option>
   <option value="Pisces">Pisces (February 19-March 20)</option>
 </select>
-   <button type="submit">Update</button>
+<br>
+   <button class="submit" type="submit">Update</button>
 </form>
+</div>
+</div>

@@ -1,38 +1,44 @@
-<!DOCTYPE html>
 <html lang="en">
 
-   <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <title>{{title}}</title>
-      <link rel="stylesheet" href="/stylesheets/style.css" />
-      <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lato:wght@100&display=swap" rel="stylesheet">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lato:wght@100&display=swap" rel="stylesheet">
-   </head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200&display=swap"
+      rel="stylesheet"
+    />
 
-   <body>
-<nav>
+  </head>
+  <body>
+    <nav class="nav-bar">
       {{#if globalUser}}
-      
+
         <p>Hello, {{globalUser.name}}</p>
+
         <a href="/user/logout">Log out</a>
-         
-        
-
       {{else}}
-        <a href="/user/login">Log in</a>
-        <a href="/user/signup">Create an account</a>
+      <div>
+        <a href="/user/login" class="login-link">log in</a>
+        <a href="/user/signup" class="signup-link">sign up</a>
+      </div>
       {{/if}}
+        <div class="title-navbar">
+          <h3>{{title}}</h3>
+        </div>
     </nav>
-      {{{body}}}
-     
+    {{{body}}}
 
-      <script src="/js/script.js"></script>
-   </body>
+    <script src="/js/script.js"></script>
+  </body>
 
 </html>

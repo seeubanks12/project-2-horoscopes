@@ -1,14 +1,15 @@
-<form action="/user/login" method="POST">
-   <label> Email
-      <input type="text" name="email">
-   </label>
-   <label> Password
-      <input type="password" name="password">
-   </label>
-
-   <button type="submit">Submit</button>
-</form>
-
+ <div class="login-form">
+   <p class="sign" align="center">log in</p>
+      <form class="form1" align="center" action="/user/login" method="POST">
+      <input class="un" align="center" type="text" name="email" placeholder="email">
+      <br>
+      <input class="pass" align="center" type="password" name="password" placeholder="password">
+      <br>
+      <button type="submit" align="center" class="submit">submit</button>
+      </form>
+</div>
 {{#if errorMessage}}
    {{errorMessage}}
 {{/if}}
+
+

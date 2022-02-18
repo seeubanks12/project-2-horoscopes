@@ -1,7 +1,8 @@
-
-<h1>This is {{user.name}}'s profile page</h1>
-
+<div class="profile-page" align="center">
+    <div class="username">
 <h2>{{user.name}}'s Daily Horoscope</h2>
+</div>
+<div class="daily-horoscope">
 <p>{{user.sign}}</p>
 <p>Today's Date: {{horoscope.current_date}}</p>
 <p>Your Horoscope: {{horoscope.description}}</p>
@@ -10,12 +11,17 @@
 <p>Your Lucky Number: {{horoscope.lucky_number}}</p>
 <p>Your Lucky Time: {{horoscope.lucky_time}}</p>
 <p>Your Mood: {{horoscope.mood}}</p>
+</div>
 
+<div class="log-link">
+<a href="/log/daily-logs/create-log" class="add-entry">Add Entry</a>
+<a href ="/log/{{user.id}}/all-logs" class="all-logs">All Entries</a>
+<br>
 
-<a href="/log/daily-logs/create-log">Add Entry</a>
-<a href ="/log/{{user.id}}/all-logs">All Entries</a>
+<a href="/user/{{user.id}}/edit-user" align="center" class="edit-user">Update Information</a>
 
-<a href="/user/{{user.id}}/edit-user">Update Information</a>
 <form action ="/user/{{user.id}}/delete" method ="POST">
-<button type="submit">Delete Account</button>
+<button algin="center" type="submit" class="delete">Delete Account</button>
+</div>
+</div>
 
