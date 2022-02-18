@@ -22,10 +22,11 @@
   <body>
     <nav class="nav-bar">
       {{#if globalUser}}
-
+<div class="global">
         <p>Hello, {{globalUser.name}}</p>
 
-        <a href="/user/logout">Log out</a>
+        <a href="/user/logout" class="logout">Log out</a>
+        </div>
       {{else}}
       <div>
         <a href="/user/login" class="login-link">log in</a>

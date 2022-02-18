@@ -1,6 +1,6 @@
- <a href="/user/{{user._id}}/profile-page">Back to Profile</a>
+
  
-<div class="all-logs">
+<div class="all-logs" align="center">
 {{#each logs}}
 
   <h3>{{this.date}}</h3>
@@ -9,8 +9,11 @@
   {{/each}}
   <p>{{this.content}}</p>
   <a href="/log/edit-log/{{this._id}}">Update</a>
+  <br>
 <form action ="/log/delete/{{this._id}}" method ="POST">
-<button type="submit">Delete</button>
+<button class="delete" type="submit">Delete</button>
 
 {{/each}}
 </div>
+
+<a href="/user/{{user._id}}/profile-page">Back to Profile</a>
